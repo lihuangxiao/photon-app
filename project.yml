@@ -1,0 +1,71 @@
+name: Photon
+options:
+  bundleIdPrefix: com.photonapp
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: 1
+
+schemes:
+  Photon:
+    build:
+      targets:
+        Photon: all
+    test:
+      targets:
+        - PhotonUITests
+
+  PhotonUITests:
+    build:
+      targets:
+        Photon: all
+        PhotonUITests: [test]
+    test:
+      targets:
+        - PhotonUITests
+
+targets:
+  Photon:
+    type: application
+    platform: iOS
+    sources:
+      - Photon
+    settings:
+      base:
+        INFOPLIST_FILE: Photon/Resources/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 7UFF3D3K9F
+        PRODUCT_BUNDLE_IDENTIFIER: com.photonapp.photon
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: false
+    info:
+      path: Photon/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Photon
+        CFBundleName: Photon
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSPhotoLibraryUsageDescription: "Photon needs access to your photo library to analyze and help you organize and clean up your photos."
+
+  PhotonUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - PhotonUITests
+    dependencies:
+      - target: Photon
+    settings:
+      base:
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 7UFF3D3K9F
+        GENERATE_INFOPLIST_FILE: YES

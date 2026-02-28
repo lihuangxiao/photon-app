@@ -1,0 +1,31 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcarchive
+*.ipa
+
+# Xcode user-specific data
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+*.xccheckout
+*.xcscmblueprint
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.resolved
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
