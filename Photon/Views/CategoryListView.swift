@@ -5,6 +5,7 @@ import SwiftUI
 /// has more than `maxVisiblePerSignal` groups, show the top N and collapse the rest.
 struct CategoryListView: View {
     @ObservedObject var viewModel: ScanViewModel
+    var onRescan: () -> Void = {}
 
     private var maxVisible: Int {
         viewModel.groupingConfig.maxVisiblePerSignal
@@ -84,7 +85,15 @@ struct CategoryListView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .toolbar { }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    onRescan()
+                } label: {
+                    Label("Rescan", systemImage: "arrow.clockwise")
+                }
+            }
+        }
     }
 
     // MARK: - Collapse Logic

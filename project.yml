@@ -17,18 +17,24 @@ schemes:
     build:
       targets:
         Photon: all
+    run:
+      storeKitConfiguration: Photon/Resources/Photon.storekit
     test:
       targets:
         - PhotonUITests
+      storeKitConfiguration: Photon/Resources/Photon.storekit
 
   PhotonUITests:
     build:
       targets:
         Photon: all
         PhotonUITests: [test]
+    run:
+      storeKitConfiguration: Photon/Resources/Photon.storekit
     test:
       targets:
         - PhotonUITests
+      storeKitConfiguration: Photon/Resources/Photon.storekit
 
 targets:
   Photon:
@@ -45,6 +51,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.photonapp.photon
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: false
+        CODE_SIGN_ENTITLEMENTS: Photon/Resources/Photon.entitlements
     info:
       path: Photon/Resources/Info.plist
       properties:

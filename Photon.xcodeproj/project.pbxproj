@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08F446AA040060857182B4F7 /* Photon.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F2495A806F23ABE8A0AC3BA0 /* Photon.storekit */; };
 		0E35A073E99DE1978D5E9D85 /* GroupingPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE5C9751E0752C2B2B1EE4C /* GroupingPipeline.swift */; };
 		0EADBFF71D64FC5EB346319F /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A0E49B23B6430556759FF0 /* ScanViewModel.swift */; };
 		100E655F1113AA3FB18BADB6 /* EmbeddingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117BD8B1565B0191E7012EE /* EmbeddingService.swift */; };
+		1975D70718496C25CF74E63F /* ScanResultStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FEFE1270F052AD10B971FE /* ScanResultStore.swift */; };
 		2D08D111133EFE63D353CBFE /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27EF689B8B4EE5FEB01B192 /* SessionStats.swift */; };
+		3379B5D4EE53AE2B2D6337B9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C2631AF09542044880A54D97 /* PrivacyInfo.xcprivacy */; };
 		420CD297B2650CA0DD61FBAA /* PhotonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1087182F779BE3999FAE65 /* PhotonApp.swift */; };
+		5A2DF43BEF4E56BC17ED093E /* PhotonPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D2567F7B253969447AEFC /* PhotonPersistenceTests.swift */; };
 		62032EC1F20B5E128F20AA3F /* AsyncFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7B4744B8324A3E15FAC8C /* AsyncFactory.swift */; };
+		64EAFAD59BB5E71EC64E7DAF /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB862BC5DC88D5135CE0820 /* StoreKitService.swift */; };
 		679D055D0BD4F6C83AAD7461 /* PhotoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E443C3AD6A3219056ECA27 /* PhotoCategory.swift */; };
 		6E988E904BE11FE2ED918E80 /* PhotonE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2C744A233B0801F748B78 /* PhotonE2ETests.swift */; };
+		6ED0F9B152B055A51988F614 /* PersistedScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78385BB90D4B03F7298F9E /* PersistedScanResult.swift */; };
 		86F897C9D9486C7B1CDB5C8D /* PhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD363024859FA95D77DDCBE /* PhotoLibraryService.swift */; };
 		A31BBF635576B5A0043FF172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A3E727D5E0694927D8BEC2E /* Assets.xcassets */; };
 		A4D6B63273F1650BF2F6C5CB /* CIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5746A37F8B04DCC33C494C0 /* CIImageExtensions.swift */; };
@@ -29,6 +35,7 @@
 		DA9830D84D988AAD68154CA1 /* CollapsedGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A28A392B205859DFFF9971 /* CollapsedGroupListView.swift */; };
 		DCB19A03AFA584F530214787 /* SessionSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5372E791F3C2D6666BF1E8 /* SessionSummaryView.swift */; };
 		DEB5CF0F147C392F496B2D18 /* ScoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0FD8E0087712951E08DBEB /* ScoringService.swift */; };
+		EC76F9E6832940EF7CDD8E2B /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF32F809C15AC2E2D643B0A /* PaywallView.swift */; };
 		F3D1726CE1642C9BA9E9FD05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA0089672F3D2051A5719E /* ContentView.swift */; };
 		F534461EE4BDA1A204C46C76 /* mobileclip_s2_image.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = BBC740EF3CD9B67F33EB9A41 /* mobileclip_s2_image.mlpackage */; };
 /* End PBXBuildFile section */
@@ -49,8 +56,10 @@
 		3117BD8B1565B0191E7012EE /* EmbeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddingService.swift; sourceTree = "<group>"; };
 		35307B0F0B1076BCDD74E704 /* PhotonUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PhotonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		358FFD968BD4F4785FDE6CDA /* ScanProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanProgressView.swift; sourceTree = "<group>"; };
+		377D2567F7B253969447AEFC /* PhotonPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotonPersistenceTests.swift; sourceTree = "<group>"; };
 		37EA0089672F3D2051A5719E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3A3E727D5E0694927D8BEC2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48FEFE1270F052AD10B971FE /* ScanResultStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultStore.swift; sourceTree = "<group>"; };
 		52AF09806643A32A9103B1C6 /* Photon.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Photon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B52E873ABA99F1F34F0A2E /* BlurDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurDetectionService.swift; sourceTree = "<group>"; };
 		6AD363024859FA95D77DDCBE /* PhotoLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryService.swift; sourceTree = "<group>"; };
@@ -61,16 +70,22 @@
 		7DC7B4744B8324A3E15FAC8C /* AsyncFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFactory.swift; sourceTree = "<group>"; };
 		923DEAD4800CB1555E891B43 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9CA2C744A233B0801F748B78 /* PhotonE2ETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotonE2ETests.swift; sourceTree = "<group>"; };
+		ABF32F809C15AC2E2D643B0A /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		B5952FF4BC389335C8F6E1B2 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		BBB862BC5DC88D5135CE0820 /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
 		BBC740EF3CD9B67F33EB9A41 /* mobileclip_s2_image.mlpackage */ = {isa = PBXFileReference; path = mobileclip_s2_image.mlpackage; sourceTree = "<group>"; };
 		C019F5D6796FB11EF20B138D /* PhotoAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAsset.swift; sourceTree = "<group>"; };
+		C2631AF09542044880A54D97 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C27EF689B8B4EE5FEB01B192 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
 		C5A28A392B205859DFFF9971 /* CollapsedGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedGroupListView.swift; sourceTree = "<group>"; };
+		C7D868911BEA71F11F22EF69 /* Photon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Photon.entitlements; sourceTree = "<group>"; };
 		D513118F8A71ADE3BB394607 /* DeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionService.swift; sourceTree = "<group>"; };
 		DD0FD8E0087712951E08DBEB /* ScoringService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringService.swift; sourceTree = "<group>"; };
 		DD5372E791F3C2D6666BF1E8 /* SessionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSummaryView.swift; sourceTree = "<group>"; };
 		E5746A37F8B04DCC33C494C0 /* CIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImageExtensions.swift; sourceTree = "<group>"; };
+		F2495A806F23ABE8A0AC3BA0 /* Photon.storekit */ = {isa = PBXFileReference; path = Photon.storekit; sourceTree = "<group>"; };
 		F7846274B57A18157C8232A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FA78385BB90D4B03F7298F9E /* PersistedScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedScanResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -86,6 +101,7 @@
 		08AC7E369FFFB748F87FE8C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA78385BB90D4B03F7298F9E /* PersistedScanResult.swift */,
 				C019F5D6796FB11EF20B138D /* PhotoAsset.swift */,
 				28E443C3AD6A3219056ECA27 /* PhotoCategory.swift */,
 				C27EF689B8B4EE5FEB01B192 /* SessionStats.swift */,
@@ -103,7 +119,9 @@
 				3117BD8B1565B0191E7012EE /* EmbeddingService.swift */,
 				6FE5C9751E0752C2B2B1EE4C /* GroupingPipeline.swift */,
 				6AD363024859FA95D77DDCBE /* PhotoLibraryService.swift */,
+				48FEFE1270F052AD10B971FE /* ScanResultStore.swift */,
 				DD0FD8E0087712951E08DBEB /* ScoringService.swift */,
+				BBB862BC5DC88D5135CE0820 /* StoreKitService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -138,6 +156,7 @@
 				C5A28A392B205859DFFF9971 /* CollapsedGroupListView.swift */,
 				37EA0089672F3D2051A5719E /* ContentView.swift */,
 				923DEAD4800CB1555E891B43 /* DebugView.swift */,
+				ABF32F809C15AC2E2D643B0A /* PaywallView.swift */,
 				358FFD968BD4F4785FDE6CDA /* ScanProgressView.swift */,
 				DD5372E791F3C2D6666BF1E8 /* SessionSummaryView.swift */,
 				284C9A06135C5D0E7928D7E4 /* ToastView.swift */,
@@ -150,6 +169,9 @@
 			children = (
 				3A3E727D5E0694927D8BEC2E /* Assets.xcassets */,
 				F7846274B57A18157C8232A7 /* Info.plist */,
+				C7D868911BEA71F11F22EF69 /* Photon.entitlements */,
+				F2495A806F23ABE8A0AC3BA0 /* Photon.storekit */,
+				C2631AF09542044880A54D97 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -166,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				9CA2C744A233B0801F748B78 /* PhotonE2ETests.swift */,
+				377D2567F7B253969447AEFC /* PhotonPersistenceTests.swift */,
 			);
 			path = PhotonUITests;
 			sourceTree = "<group>";
@@ -272,6 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A31BBF635576B5A0043FF172 /* Assets.xcassets in Resources */,
+				08F446AA040060857182B4F7 /* Photon.storekit in Resources */,
+				3379B5D4EE53AE2B2D6337B9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,15 +318,19 @@
 				B89119E668D9C567D93B2BC9 /* DeletionService.swift in Sources */,
 				100E655F1113AA3FB18BADB6 /* EmbeddingService.swift in Sources */,
 				0E35A073E99DE1978D5E9D85 /* GroupingPipeline.swift in Sources */,
+				EC76F9E6832940EF7CDD8E2B /* PaywallView.swift in Sources */,
+				6ED0F9B152B055A51988F614 /* PersistedScanResult.swift in Sources */,
 				B6E6E6890BEBEF8DC3073BD8 /* PhotoAsset.swift in Sources */,
 				679D055D0BD4F6C83AAD7461 /* PhotoCategory.swift in Sources */,
 				86F897C9D9486C7B1CDB5C8D /* PhotoLibraryService.swift in Sources */,
 				420CD297B2650CA0DD61FBAA /* PhotonApp.swift in Sources */,
 				BB3D8A40154F52C8000E79A7 /* ScanProgressView.swift in Sources */,
+				1975D70718496C25CF74E63F /* ScanResultStore.swift in Sources */,
 				0EADBFF71D64FC5EB346319F /* ScanViewModel.swift in Sources */,
 				DEB5CF0F147C392F496B2D18 /* ScoringService.swift in Sources */,
 				2D08D111133EFE63D353CBFE /* SessionStats.swift in Sources */,
 				DCB19A03AFA584F530214787 /* SessionSummaryView.swift in Sources */,
+				64EAFAD59BB5E71EC64E7DAF /* StoreKitService.swift in Sources */,
 				A810FFB8BF976FBCB1AD80CA /* ToastView.swift in Sources */,
 				F534461EE4BDA1A204C46C76 /* mobileclip_s2_image.mlpackage in Sources */,
 			);
@@ -312,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E988E904BE11FE2ED918E80 /* PhotonE2ETests.swift in Sources */,
+				5A2DF43BEF4E56BC17ED093E /* PhotonPersistenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Photon/Resources/Photon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UFF3D3K9F;
@@ -349,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Photon/Resources/Photon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UFF3D3K9F;

@@ -2,15 +2,19 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ScanViewModel()
+    @EnvironmentObject var storeService: StoreKitService
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
             Group {
                 switch viewModel.state {
                 case .idle:
-                    WelcomeView(onStart: {
-                        Task { await viewModel.startScan() }
-                    })
+                    WelcomeView(
+                        isPro: storeService.isPro,
+                        freeScansRemaining: storeService.freeScansRemaining,
+                        onStart: handleStartScan
+                    )
 
                 case .requestingPermission:
                     ProgressMessageView(
@@ -67,7 +71,7 @@ struct ContentView: View {
                     )
 
                 case .complete:
-                    CategoryListView(viewModel: viewModel)
+                    CategoryListView(viewModel: viewModel, onRescan: handleRescan)
 
                 case .error(let message):
                     ErrorView(message: message, onRetry: {
@@ -77,6 +81,7 @@ struct ContentView: View {
             }
             .navigationTitle("Photon")
             .navigationBarTitleDisplayMode(.large)
+            #if DEBUG
             .toolbar {
                 if viewModel.state == .complete && !viewModel.categories.isEmpty {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -90,6 +95,29 @@ struct ContentView: View {
             }
             .sheet(isPresented: $viewModel.showDebug) {
                 DebugView(viewModel: viewModel)
+            }
+            #endif
+        }
+        .task {
+            await viewModel.loadPersistedResults()
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(onPurchaseComplete: {
+                if viewModel.state == .complete {
+                    viewModel.rescan()
+                } else {
+                    Task { await viewModel.startScan() }
+                }
+            })
+        }
+        .onChange(of: viewModel.state) { oldState, newState in
+            // Record scan completion for free-scan gating.
+            // Only count full scans (from .detectingBlur → .grouping → .complete),
+            // not debug re-grouping or persisted result loading.
+            if newState == .complete && oldState == .grouping
+                && viewModel.totalPhotos > 0 && viewModel.embeddingProgress > 0
+                && !storeService.isPro {
+                storeService.recordCompletedScan()
             }
         }
         // Toast overlay
@@ -113,11 +141,31 @@ struct ContentView: View {
             )
         }
     }
+
+    // MARK: - Gating
+
+    private func handleStartScan() {
+        if storeService.isPro || storeService.canScanForFree {
+            Task { await viewModel.startScan() }
+        } else {
+            showPaywall = true
+        }
+    }
+
+    private func handleRescan() {
+        if storeService.isPro || storeService.canScanForFree {
+            viewModel.rescan()
+        } else {
+            showPaywall = true
+        }
+    }
 }
 
 // MARK: - Welcome View
 
 struct WelcomeView: View {
+    var isPro: Bool = false
+    var freeScansRemaining: Int = 2
     let onStart: () -> Void
 
     var body: some View {
@@ -132,7 +180,7 @@ struct WelcomeView: View {
                 .font(.title)
                 .fontWeight(.bold)
 
-            Text("We'll analyze your photo library and find groups of photos you might want to delete.")
+            Text("We'll analyze your photo library and find groups of photos you might want to delete. Your first scan is free — unlock unlimited scans anytime for a one-time purchase.")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -149,7 +197,25 @@ struct WelcomeView: View {
             .accessibilityIdentifier("start_scanning")
             .buttonStyle(.borderedProminent)
             .padding(.horizontal, 24)
-            .padding(.bottom, 40)
+
+            // Scan status
+            if isPro {
+                Label("Pro", systemImage: "checkmark.seal.fill")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.purple)
+            } else if freeScansRemaining > 0 {
+                Text("First scan is free")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Free scan used")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+                .frame(height: 20)
         }
     }
 }
@@ -233,4 +299,5 @@ struct ErrorView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(StoreKitService())
 }

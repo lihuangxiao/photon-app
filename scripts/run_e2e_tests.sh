@@ -15,6 +15,7 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 SIM_UDID="A8DF1AFA-6BB2-4CA0-A8F8-4EA9D0989DC6"  # iPhone 17 Pro
 BUNDLE_ID="com.photonapp.photon"
 TEST_CLASS="PhotonUITests/PhotonE2ETests"
+PERSISTENCE_CLASS="PhotonUITests/PhotonPersistenceTests"
 
 echo "=== Photon E2E Test Runner ==="
 echo ""
@@ -97,6 +98,30 @@ for test in test04_DeleteAllFlow test05_SessionSummary test06_CleanedCategoryBad
   run_test "$TEST_CLASS/$test" || FAILED=1
   echo ""
 done
+
+# --- Persistence + paywall tests (08-13): each resets its own state ---
+# These use -resetForTesting launch arg, so no photo reload needed between tests.
+# Exception: test11 deletes photos, so reload before it.
+echo "--- Running persistence + paywall tests (08-13) ---"
+reload_photos
+run_test "$PERSISTENCE_CLASS/test08_PersistenceRestoresAfterRelaunch" || FAILED=1
+run_test "$PERSISTENCE_CLASS/test09_RescanShowsPaywall" || FAILED=1
+run_test "$PERSISTENCE_CLASS/test10_KillDuringScanShowsWelcomeOnRelaunch" || FAILED=1
+echo ""
+
+echo "--- Running test11 (deletion persistence, needs fresh photos) ---"
+reload_photos
+run_test "$PERSISTENCE_CLASS/test11_DeletionPersistsAcrossRelaunch" || FAILED=1
+echo ""
+
+echo "--- Running test12 (purchase flow) ---"
+reload_photos
+run_test "$PERSISTENCE_CLASS/test12_PurchaseUnlocksRescan" || FAILED=1
+echo ""
+
+echo "--- Running test13 (first scan free) ---"
+run_test "$PERSISTENCE_CLASS/test13_FirstScanIsFree" || FAILED=1
+echo ""
 
 if [ "$FAILED" -ne 0 ]; then
   echo "=== Some tests failed. Check output above for details. ==="

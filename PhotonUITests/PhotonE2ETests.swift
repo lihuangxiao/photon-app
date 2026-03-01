@@ -21,6 +21,7 @@ final class PhotonE2ETests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
+        app.launchArguments = ["-resetForTesting"]
         app.launch()
     }
 

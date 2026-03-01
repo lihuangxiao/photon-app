@@ -1,6 +1,10 @@
 import Foundation
 import Photos
 import Combine
+import SwiftUI
+import os
+
+private let scanLog = Logger(subsystem: "com.photonapp.photon", category: "scan")
 
 /// Manages the entire scan pipeline: fetch → embed → blur detect → group → score
 @MainActor
@@ -50,7 +54,9 @@ class ScanViewModel: ObservableObject {
     @Published var statusMessage: String = "Ready to scan"
 
     // Debug mode
+    #if DEBUG
     @Published var showDebug: Bool = false
+    #endif
     var groupingConfig = GroupingConfig()
 
     // Session tracking
@@ -59,6 +65,9 @@ class ScanViewModel: ObservableObject {
     @Published var showSessionSummary = false
     @Published var toastMessage: String?
 
+    // Persistence
+    private let scanResultStore = ScanResultStore()
+
     let photoService = PhotoLibraryService()
     let embeddingService = EmbeddingService()
     private let blurService = BlurDetectionService()
@@ -66,10 +75,62 @@ class ScanViewModel: ObservableObject {
     private let scoringService = ScoringService()
     private let deletionService = DeletionService()
 
+    // MARK: - Persistence
+
+    /// Load persisted scan results on launch. Only restores if state is still idle.
+    func loadPersistedResults() async {
+        guard state == .idle else { return }
+        if let saved = await scanResultStore.load() {
+            categories = saved.categories
+            totalPhotos = saved.totalPhotos
+            categoriesFound = categories.count
+
+            let totalDeletable = categories
+                .filter { $0.confidence >= .medium }
+                .reduce(0) { $0 + $1.photoCount }
+
+            if categories.isEmpty {
+                statusMessage = "Your library looks clean!"
+            } else {
+                statusMessage = "Found \(categories.count) groups (\(totalDeletable) photos to review)"
+            }
+
+            state = .complete
+        }
+    }
+
+    // MARK: - Rescan
+
+    /// Clear persisted data and re-run the full scan pipeline.
+    func rescan() {
+        Task {
+            await scanResultStore.clear()
+            resetForScan()
+            await startScan()
+        }
+    }
+
+    private func resetForScan() {
+        state = .idle
+        categories = []
+        fetchProgress = 0
+        embeddingProgress = 0
+        blurProgress = 0
+        totalPhotos = 0
+        photosProcessed = 0
+        blurPhotosProcessed = 0
+        categoriesFound = 0
+        statusMessage = "Ready to scan"
+        sessionStats = SessionStats()
+        categoryStatuses = [:]
+    }
+
     /// Start the full scan pipeline
     func startScan() async {
+        scanLog.notice("startScan() called, current state: \(String(describing: self.state))")
         // Step 1: Check existing permission, only prompt if needed
         let currentStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        scanLog.notice("Photo auth status: \(String(describing: currentStatus.rawValue))")
         let status: PHAuthorizationStatus
         if currentStatus == .authorized || currentStatus == .limited {
             status = currentStatus
@@ -80,11 +141,13 @@ class ScanViewModel: ObservableObject {
         }
 
         guard status == .authorized || status == .limited else {
+            scanLog.notice("Permission denied: \(String(describing: status.rawValue))")
             state = .permissionDenied
             statusMessage = "Photo access is required to scan your library"
             return
         }
 
+        scanLog.notice("Permission granted, starting fetch")
         // Step 2: Show immediate feedback, then fetch photos
         state = .preparing
         statusMessage = "Preparing..."
@@ -99,6 +162,7 @@ class ScanViewModel: ObservableObject {
         await photoService.fetchAllAssets()
         totalPhotos = photoService.totalPhotoCount
         fetchProgress = 1.0
+        scanLog.notice("Fetched \(self.totalPhotos) photos")
 
         guard totalPhotos > 0 else {
             modelLoadTask.cancel()
@@ -164,6 +228,7 @@ class ScanViewModel: ObservableObject {
         }
 
         statusMessage = "Image analysis complete"
+        scanLog.notice("Blur detection complete, running grouping")
 
         // Step 5: Run grouping pipeline + scoring
         await runGroupingAndScoring()
@@ -204,6 +269,10 @@ class ScanViewModel: ObservableObject {
         } else {
             statusMessage = "Found \(categories.count) groups (\(totalDeletable) photos to review)"
         }
+
+        scanLog.notice("Grouping complete: \(self.categories.count) categories, saving")
+        // Persist results
+        try? await scanResultStore.save(totalPhotos: totalPhotos, categories: categories)
     }
 
     /// Get PhotoAsset objects for a category
@@ -286,6 +355,11 @@ class ScanViewModel: ObservableObject {
         }
 
         categoriesFound = categories.count
+
+        // Keep persisted data in sync
+        Task {
+            try? await scanResultStore.save(totalPhotos: totalPhotos, categories: categories)
+        }
     }
 
     // MARK: - Toast
