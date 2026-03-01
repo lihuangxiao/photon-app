@@ -6,9 +6,8 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showPaywall = false
 
-    // TODO: Replace with your real URLs before submission
-    private let privacyPolicyURL = URL(string: "https://example.com/privacy")!
-    private let supportEmail = "support@photonapp.com"
+    private let privacyPolicyURL = URL(string: "https://lihuangxiao.github.io/photon-app/privacy_policy")!
+    private let supportEmail = "lihuangxiao@hotmail.com"
 
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"

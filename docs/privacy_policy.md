@@ -50,4 +50,4 @@ If we update this policy, the revised version will be posted here with an update
 
 If you have questions about this privacy policy, please contact us at:
 
-**Email:** support@photonapp.com
+**Email:** lihuangxiao@hotmail.com

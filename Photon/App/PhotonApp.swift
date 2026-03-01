@@ -10,12 +10,14 @@ struct PhotonApp: App {
     init() {
         logger.notice("[Photon] App init")
 
+        #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-resetForTesting") {
             logger.notice("[Photon] Resetting state for testing")
             UserDefaults.standard.removeObject(forKey: "completedScanCount")
             let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             try? FileManager.default.removeItem(at: docs.appendingPathComponent("scan_result.json"))
         }
+        #endif
     }
 
     var body: some Scene {
