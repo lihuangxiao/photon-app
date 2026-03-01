@@ -6,6 +6,7 @@ import SwiftUI
 struct CategoryListView: View {
     @ObservedObject var viewModel: ScanViewModel
     var onRescan: () -> Void = {}
+    @State private var showSettings = false
 
     private var maxVisible: Int {
         viewModel.groupingConfig.maxVisiblePerSignal
@@ -86,6 +87,13 @@ struct CategoryListView: View {
         }
         .listStyle(.insetGrouped)
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    showSettings = true
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     onRescan()
@@ -93,6 +101,9 @@ struct CategoryListView: View {
                     Label("Rescan", systemImage: "arrow.clockwise")
                 }
             }
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
     }
 

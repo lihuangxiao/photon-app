@@ -4,6 +4,9 @@ import CoreImage
 import Vision
 import UIKit
 import Photos
+import os
+
+private let embeddingLog = Logger(subsystem: "com.photonapp.photon", category: "embedding")
 
 /// Generates image embeddings for photo similarity analysis.
 ///
@@ -31,9 +34,9 @@ class EmbeddingService: ObservableObject {
             config.computeUnits = .all
             imageEncoder = try await mobileclip_s2_image.load(configuration: config)
             backend = .mobileCLIP
-            print("[Photon] Loaded MobileCLIP S2")
+            embeddingLog.notice("Loaded MobileCLIP S2")
         } catch {
-            print("[Photon] MobileCLIP failed: \(error.localizedDescription). Using Vision FeaturePrint.")
+            embeddingLog.notice("MobileCLIP failed: \(error.localizedDescription). Using Vision FeaturePrint.")
             backend = .visionFeaturePrint
         }
     }
@@ -81,7 +84,7 @@ class EmbeddingService: ObservableObject {
         processedCount = total
         progress = 1.0
         isProcessing = false
-        print("[Photon] Done: \(results.count)/\(total) embeddings via \(backend.rawValue)")
+        embeddingLog.notice("Done: \(results.count)/\(total) embeddings via \(self.backend.rawValue)")
         return results
     }
 

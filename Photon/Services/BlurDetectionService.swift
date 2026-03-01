@@ -3,6 +3,9 @@ import Accelerate
 import UIKit
 import Photos
 import Vision
+import os
+
+private let blurLog = Logger(subsystem: "com.photonapp.photon", category: "blur")
 
 /// Detects blurry photos, dark photos, and document photos using image analysis.
 /// Blur: Laplacian variance — higher = sharper, lower = blurrier.
@@ -76,7 +79,7 @@ class BlurDetectionService {
             }
         }
 
-        print("[Photon] Image analysis done: \(results.count)/\(total) scores computed")
+        blurLog.notice("Image analysis done: \(results.count)/\(total) scores computed")
         return results
     }
 

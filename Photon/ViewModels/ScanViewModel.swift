@@ -2,6 +2,7 @@ import Foundation
 import Photos
 import Combine
 import SwiftUI
+import StoreKit
 import os
 
 private let scanLog = Logger(subsystem: "com.photonapp.photon", category: "scan")
@@ -64,6 +65,9 @@ class ScanViewModel: ObservableObject {
     @Published var categoryStatuses: [UUID: CategoryStatus] = [:]
     @Published var showSessionSummary = false
     @Published var toastMessage: String?
+
+    // Rating prompt — only once per app version
+    @AppStorage("lastRatingPromptVersion") private var lastRatingPromptVersion: String = ""
 
     // Persistence
     private let scanResultStore = ScanResultStore()
@@ -302,6 +306,9 @@ class ScanViewModel: ObservableObject {
             // Show toast
             showToast("Deleted \(count) photo\(count == 1 ? "" : "s") — \(ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)) freed")
 
+            // Request app rating after first successful deletion (once per version)
+            requestRatingIfNeeded()
+
             return true
 
         case .cancelled:
@@ -370,6 +377,23 @@ class ScanViewModel: ObservableObject {
             try? await Task.sleep(for: .seconds(3))
             if toastMessage == message {
                 toastMessage = nil
+            }
+        }
+    }
+
+    // MARK: - Rating Prompt
+
+    private func requestRatingIfNeeded() {
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        guard lastRatingPromptVersion != currentVersion else { return }
+        lastRatingPromptVersion = currentVersion
+
+        // Small delay so the toast shows first
+        Task {
+            try? await Task.sleep(for: .seconds(1.5))
+            if let scene = UIApplication.shared.connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
             }
         }
     }

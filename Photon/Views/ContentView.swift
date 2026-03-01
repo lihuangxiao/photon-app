@@ -4,6 +4,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ScanViewModel()
     @EnvironmentObject var storeService: StoreKitService
     @State private var showPaywall = false
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
@@ -81,8 +82,17 @@ struct ContentView: View {
             }
             .navigationTitle("Photon")
             .navigationBarTitleDisplayMode(.large)
-            #if DEBUG
             .toolbar {
+                if viewModel.state == .idle {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Label("Settings", systemImage: "gearshape")
+                        }
+                    }
+                }
+                #if DEBUG
                 if viewModel.state == .complete && !viewModel.categories.isEmpty {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -92,11 +102,16 @@ struct ContentView: View {
                         }
                     }
                 }
+                #endif
             }
+            #if DEBUG
             .sheet(isPresented: $viewModel.showDebug) {
                 DebugView(viewModel: viewModel)
             }
             #endif
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+            }
         }
         .task {
             await viewModel.loadPersistedResults()

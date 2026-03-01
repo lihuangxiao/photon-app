@@ -1,6 +1,9 @@
 import Foundation
 import Accelerate
 import CoreLocation
+import os
+
+private let groupLog = Logger(subsystem: "com.photonapp.photon", category: "grouping")
 
 /// Tunable parameters for all grouping signals
 struct GroupingConfig {
@@ -105,14 +108,7 @@ class GroupingPipeline {
         let beforeFilter = allGroups.count
         allGroups = allGroups.filter { $0.photoCount >= minSize }
 
-        print("[Photon] Grouping complete: \(allGroups.count) groups (filtered \(beforeFilter - allGroups.count) small) " +
-              "— bursts: \(burstGroups.count), near-dupes: \(nearDupeGroups.count), " +
-              "screenshots: \(screenshotGroups.count), blur: \(blurGroups.count), " +
-              "trips: \(tripGroups.count), videos: \(videoGroups.count), " +
-              "screen-rec: \(screenRecordingGroups.count), live: \(livePhotoGroups.count), " +
-              "old: \(oldPhotoGroups.count), dark: \(darkGroups.count), " +
-              "docs: \(documentGroups.count), saved: \(savedImageGroups.count), " +
-              "near-dupe claimed \(claimedIDs.count) photos exclusively")
+        groupLog.notice("Grouping complete: \(allGroups.count) groups (filtered \(beforeFilter - allGroups.count) small) — bursts: \(burstGroups.count), near-dupes: \(nearDupeGroups.count), screenshots: \(screenshotGroups.count), blur: \(blurGroups.count), trips: \(tripGroups.count), videos: \(videoGroups.count), screen-rec: \(screenRecordingGroups.count), live: \(livePhotoGroups.count), old: \(oldPhotoGroups.count), dark: \(darkGroups.count), docs: \(documentGroups.count), saved: \(savedImageGroups.count), near-dupe claimed \(claimedIDs.count) photos exclusively")
 
         return allGroups
     }
@@ -143,7 +139,7 @@ class GroupingPipeline {
             guard groupAssets.count >= config.nearDuplicateMinPoints else { return nil }
 
             if groupAssets.count > maxSize {
-                print("[Photon] Dropping near-duplicate mega-cluster of \(groupAssets.count) photos")
+                groupLog.debug("Dropping near-duplicate mega-cluster of \(groupAssets.count) photos")
                 return nil
             }
 
