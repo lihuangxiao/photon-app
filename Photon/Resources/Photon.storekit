@@ -15,7 +15,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.photonapp.photon.pro",
+      "productID" : "com.lihuangxiao.photon.pro",
       "referenceName" : "Photon Pro",
       "type" : "NonConsumable"
     }

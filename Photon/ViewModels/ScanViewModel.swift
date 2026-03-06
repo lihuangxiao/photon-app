@@ -5,7 +5,7 @@ import SwiftUI
 import StoreKit
 import os
 
-private let scanLog = Logger(subsystem: "com.photonapp.photon", category: "scan")
+private let scanLog = Logger(subsystem: "com.lihuangxiao.photon", category: "scan")
 
 /// Manages the entire scan pipeline: fetch → embed → blur detect → group → score
 @MainActor

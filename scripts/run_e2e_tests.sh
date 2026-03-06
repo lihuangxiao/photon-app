@@ -13,7 +13,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 SIM_UDID="A8DF1AFA-6BB2-4CA0-A8F8-4EA9D0989DC6"  # iPhone 17 Pro
-BUNDLE_ID="com.photonapp.photon"
+BUNDLE_ID="com.lihuangxiao.photon"
 TEST_CLASS="PhotonUITests/PhotonE2ETests"
 PERSISTENCE_CLASS="PhotonUITests/PhotonPersistenceTests"
 

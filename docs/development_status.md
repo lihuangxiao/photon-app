@@ -153,7 +153,7 @@ xcodebuild clean build \
 # 4. Uninstall old app (prevents stale bundle caching)
 xcrun devicectl device uninstall app \
   --device <DEVICE_ID> \
-  com.photonapp.photon
+  com.lihuangxiao.photon
 
 # 5. Install fresh build
 xcrun devicectl device install app \

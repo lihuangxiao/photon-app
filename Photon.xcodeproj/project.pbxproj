@@ -31,7 +31,6 @@
 		B086F97F5864718F4267719B /* BlurDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B52E873ABA99F1F34F0A2E /* BlurDetectionService.swift */; };
 		B6E6E6890BEBEF8DC3073BD8 /* PhotoAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019F5D6796FB11EF20B138D /* PhotoAsset.swift */; };
 		B89119E668D9C567D93B2BC9 /* DeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D513118F8A71ADE3BB394607 /* DeletionService.swift */; };
-		B9B9072DDE086C9784A88B9A /* .SettingsView.swift.swp in Resources */ = {isa = PBXBuildFile; fileRef = 181C8956CB0AB6D799401556 /* .SettingsView.swift.swp */; };
 		BB3D8A40154F52C8000E79A7 /* ScanProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358FFD968BD4F4785FDE6CDA /* ScanProgressView.swift */; };
 		CD6FE96FFC286FA8D0D9022C /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5952FF4BC389335C8F6E1B2 /* CategoryListView.swift */; };
 		DA9830D84D988AAD68154CA1 /* CollapsedGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A28A392B205859DFFF9971 /* CollapsedGroupListView.swift */; };
@@ -54,7 +53,6 @@
 
 /* Begin PBXFileReference section */
 		091F5763DBE67E35C7A226F5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		181C8956CB0AB6D799401556 /* .SettingsView.swift.swp */ = {isa = PBXFileReference; path = .SettingsView.swift.swp; sourceTree = "<group>"; };
 		284C9A06135C5D0E7928D7E4 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		28E443C3AD6A3219056ECA27 /* PhotoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCategory.swift; sourceTree = "<group>"; };
 		3117BD8B1565B0191E7012EE /* EmbeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddingService.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 		8C15DE2C8596AA4C716A6091 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				181C8956CB0AB6D799401556 /* .SettingsView.swift.swp */,
 				6DB83B309E0975252117481D /* CategoryDetailView.swift */,
 				B5952FF4BC389335C8F6E1B2 /* CategoryListView.swift */,
 				C5A28A392B205859DFFF9971 /* CollapsedGroupListView.swift */,
@@ -300,7 +297,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9B9072DDE086C9784A88B9A /* .SettingsView.swift.swp in Resources */,
 				A31BBF635576B5A0043FF172 /* Assets.xcassets in Resources */,
 				08F446AA040060857182B4F7 /* Photon.storekit in Resources */,
 				3379B5D4EE53AE2B2D6337B9 /* PrivacyInfo.xcprivacy in Resources */,
@@ -377,7 +373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photonapp.photon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lihuangxiao.photon;
 				SDKROOT = iphoneos;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -397,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photonapp.photon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lihuangxiao.photon;
 				SDKROOT = iphoneos;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -539,7 +535,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photonapp.PhotonUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lihuangxiao.PhotonUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Photon;
@@ -558,7 +554,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.photonapp.PhotonUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lihuangxiao.PhotonUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Photon;

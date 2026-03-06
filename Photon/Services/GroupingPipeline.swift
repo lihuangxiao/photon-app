@@ -3,7 +3,7 @@ import Accelerate
 import CoreLocation
 import os
 
-private let groupLog = Logger(subsystem: "com.photonapp.photon", category: "grouping")
+private let groupLog = Logger(subsystem: "com.lihuangxiao.photon", category: "grouping")
 
 /// Tunable parameters for all grouping signals
 struct GroupingConfig {

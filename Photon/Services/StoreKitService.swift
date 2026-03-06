@@ -2,12 +2,12 @@ import Foundation
 import StoreKit
 import os
 
-private let storeLog = Logger(subsystem: "com.photonapp.photon", category: "store")
+private let storeLog = Logger(subsystem: "com.lihuangxiao.photon", category: "store")
 
 @MainActor
 class StoreKitService: ObservableObject {
 
-    nonisolated static let proProductID = "com.photonapp.photon.pro"
+    nonisolated static let proProductID = "com.lihuangxiao.photon.pro"
     static let freeScanLimit = 1
 
     @Published var isPro: Bool = false

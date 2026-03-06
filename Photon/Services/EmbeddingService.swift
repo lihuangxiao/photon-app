@@ -6,7 +6,7 @@ import UIKit
 import Photos
 import os
 
-private let embeddingLog = Logger(subsystem: "com.photonapp.photon", category: "embedding")
+private let embeddingLog = Logger(subsystem: "com.lihuangxiao.photon", category: "embedding")
 
 /// Generates image embeddings for photo similarity analysis.
 ///

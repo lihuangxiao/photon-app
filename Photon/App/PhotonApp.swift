@@ -1,7 +1,7 @@
 import SwiftUI
 import os
 
-private let logger = Logger(subsystem: "com.photonapp.photon", category: "app")
+private let logger = Logger(subsystem: "com.lihuangxiao.photon", category: "app")
 
 @main
 struct PhotonApp: App {

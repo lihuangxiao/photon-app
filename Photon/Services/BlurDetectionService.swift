@@ -5,7 +5,7 @@ import Photos
 import Vision
 import os
 
-private let blurLog = Logger(subsystem: "com.photonapp.photon", category: "blur")
+private let blurLog = Logger(subsystem: "com.lihuangxiao.photon", category: "blur")
 
 /// Detects blurry photos, dark photos, and document photos using image analysis.
 /// Blur: Laplacian variance — higher = sharper, lower = blurrier.
